@@ -12,9 +12,9 @@ class Documentation
       return $this->replaceLinks($contant);
     }
 
-    protocol function path($file)
+    protected function path($file)
     {
-      $file = ends_with($file, '.md') $file : $file . '.md';
+      $file = ends_with($file, '.md') ? $file : $file . '.md';
       $path = base_path('docs' . DIRECTORY_SEPARATOR . $file);
       if(! File::exists($path)) {
         about(404, '요청하신 파일이 없습니다.');
@@ -22,7 +22,7 @@ class Documentation
       return $path;
     }
 
-    protected function replaceLinks($contant)
+    protected function replaceLinks($content)
     {
       return str_replace('/docs/{{version}}', '/docs', $content);
     }
